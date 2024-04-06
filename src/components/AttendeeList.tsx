@@ -1,6 +1,7 @@
 import { Search, MoreHorizontal, ChevronsLeft, ChevronLeft, ChevronRight, ChevronsRight } from "lucide-react"
-import { formatRelative } from 'date-fns'
-import { ptBR } from 'date-fns/locale'
+import dayjs from 'dayjs'
+import 'dayjs/locale/pt-br'
+import relativeTime from 'dayjs/plugin/relativeTime'
 import { IconButton } from "./IconButton"
 import { Table } from "./table/Table"
 import { TableHeader } from "./table/TableHeader"
@@ -8,6 +9,9 @@ import { TableCell } from "./table/TableCell"
 import { TableRow } from "./table/TableRow"
 import { useState } from "react"
 import { attendees} from "../data/Attendee"
+
+dayjs.extend(relativeTime)
+dayjs.locale('pt-br')
 
 export function AttendeeList() {
   const [search, setSearch] = useState('')
@@ -48,8 +52,8 @@ export function AttendeeList() {
                   <span>{attendee.email}</span>
                 </div>
               </TableCell>
-              <TableCell>{formatRelative(attendee.createdAt, new Date(), { locale: ptBR })}</TableCell>
-              <TableCell>{formatRelative(attendee.checkedInAt, new Date(), { locale: ptBR })}</TableCell>
+              <TableCell>{dayjs().to(attendee.createdAt)}</TableCell>
+              <TableCell>{dayjs().to(attendee.checkedInAt)}</TableCell>
               <TableCell>
                 <IconButton transparent>
                   <MoreHorizontal className="size-4"/>
