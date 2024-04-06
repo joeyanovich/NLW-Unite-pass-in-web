@@ -4,8 +4,11 @@ import { Table } from "./table/Table"
 import { TableHeader } from "./table/TableHeader"
 import { TableCell } from "./table/TableCell"
 import { TableRow } from "./table/TableRow"
+import { useState } from "react"
 
 export function AttendeeList() {
+  const [search, setSearch] = useState('')
+
   return (
     <div className="flex flex-col gap-4">
       <div className="flex gap-3 items-center">
