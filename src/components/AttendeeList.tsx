@@ -5,6 +5,7 @@ import { TableHeader } from "./table/TableHeader"
 import { TableCell } from "./table/TableCell"
 import { TableRow } from "./table/TableRow"
 import { useState } from "react"
+import { attendees} from "../data/Attendee"
 
 export function AttendeeList() {
   const [search, setSearch] = useState('')
@@ -32,21 +33,21 @@ export function AttendeeList() {
           </tr>
         </thead>
         <tbody>
-          {Array.from({ length: 5 }).map((_, i) => {
+          {attendees.map((attendee) => {
             return (
-              <TableRow key={i}>
+              <TableRow key={attendee.id}>
               <TableCell>
                 <input type="checkbox" className="size-4 bg-black/20 rounded border border-white/10" name="" id="" />
               </TableCell>
-              <TableCell>1321</TableCell>
+              <TableCell>{attendee.id}</TableCell>
               <TableCell>
                 <div className="flex flex-col gap-1">
-                  <span className="font-semibold text-white">Nome</span>
-                  <span>Email</span>
+                  <span className="font-semibold text-white">{attendee.name}</span>
+                  <span>{attendee.email}</span>
                 </div>
               </TableCell>
-              <TableCell>7 dias atrás</TableCell>
-              <TableCell>3 dias atrás</TableCell>
+              <TableCell>{attendee.createdAt.toISOString()}</TableCell>
+              <TableCell>{attendee.checkedInAt.toISOString()}</TableCell>
               <TableCell>
                 <IconButton transparent>
                   <MoreHorizontal className="size-4"/>
