@@ -17,6 +17,21 @@ export function AttendeeList() {
   const [search, setSearch] = useState('')
   const [page, setPage] = useState(1)
 
+  const totalPages = Math.ceil(attendees.length / 10)
+
+  function goToFirstPage() {
+    setPage(1)
+  }
+  function goToLastPage() {
+    setPage(totalPages)
+  }
+  function goToNextPage() {
+    setPage(page + 1)
+  }
+  function goToPreviousPage() {
+    setPage(page - 1)
+  }
+
   return (
     <div className="flex flex-col gap-4">
       <div className="flex gap-3 items-center">
@@ -71,18 +86,18 @@ export function AttendeeList() {
             </TableCell>
             <TableCell className=" text-right" colSpan={3}>
               <div className="inline-flex gap-8 items-center">
-                <span>Página {page} de {Math.ceil(attendees.length / 10)}</span>
+                <span>Página {page} de {totalPages}</span>
                 <div className="flex gap-1.5">
-                  <IconButton>
+                  <IconButton onClick={goToFirstPage}>
                     <ChevronsLeft className="size-4"/>
                   </IconButton>
-                  <IconButton>
+                  <IconButton onClick={goToPreviousPage}>
                     <ChevronLeft className="size-4"/>
                   </IconButton>
-                  <IconButton>
+                  <IconButton onClick={goToNextPage}>
                     <ChevronRight className="size-4"/>
                   </IconButton>
-                  <IconButton>
+                  <IconButton onClick={goToLastPage}>
                     <ChevronsRight className="size-4"/>
                   </IconButton>
                 </div>
