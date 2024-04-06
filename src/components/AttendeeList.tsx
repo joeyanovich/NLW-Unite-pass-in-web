@@ -15,6 +15,7 @@ dayjs.locale('pt-br')
 
 export function AttendeeList() {
   const [search, setSearch] = useState('')
+  const [page, setPage] = useState(1)
 
   return (
     <div className="flex flex-col gap-4">
@@ -39,7 +40,7 @@ export function AttendeeList() {
           </tr>
         </thead>
         <tbody>
-          {attendees.map((attendee) => {
+          {attendees.slice((page - 1) * 10, page * 10).map((attendee) => {
             return (
               <TableRow key={attendee.id}>
               <TableCell>
@@ -66,11 +67,11 @@ export function AttendeeList() {
         <tfoot>
           <tr>
             <TableCell colSpan={3}>
-              Mostrando 10 de 228 itens
+              Mostrando 10 de {attendees.length} itens
             </TableCell>
             <TableCell className=" text-right" colSpan={3}>
               <div className="inline-flex gap-8 items-center">
-                <span>Página 1 de 23</span>
+                <span>Página {page} de {Math.ceil(attendees.length / 10)}</span>
                 <div className="flex gap-1.5">
                   <IconButton>
                     <ChevronsLeft className="size-4"/>
