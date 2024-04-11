@@ -4,7 +4,9 @@ import { NavLink } from './NavLink'
 export function Header() {
   return (
     <header className='flex items-center gap-5 py-2'>
-      <img src={logo} alt="Logomarca do evento" />
+      <a href="/">
+        <img src={logo} alt="Logomarca do evento" />
+      </a>
 
       <nav className='flex items-center gap-5'>
         <NavLink href='/eventos'>Eventos</NavLink>
